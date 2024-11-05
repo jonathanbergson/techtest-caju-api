@@ -8,11 +8,11 @@ const contacts = [];
 app.use(cors());
 app.use(express.json());
 
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-app.post('/api/contacts', (req, res) => {
+app.post('/contacts', (req, res) => {
   const { avatar, firstName, lastName, twitter, notes } = req.body;
   const contact = {
     id: Math.random().toString(36).substring(2, 9),
@@ -28,7 +28,7 @@ app.post('/api/contacts', (req, res) => {
   res.status(201).send(contact);
 });
 
-app.get('/api/contacts', (req, res) => {
+app.get('/contacts', (req, res) => {
   const { q } = req.query;
   const filteredContacts = q
     ? contacts.filter(contact =>
@@ -39,7 +39,7 @@ app.get('/api/contacts', (req, res) => {
   res.status(200).send(filteredContacts);
 });
 
-app.get('/api/contacts/:id', (req, res) => {
+app.get('/contacts/:id', (req, res) => {
   const { id } = req.params;
   const contact = contacts.find(contact => contact.id === id);
   if (contact) {
@@ -49,7 +49,7 @@ app.get('/api/contacts/:id', (req, res) => {
   }
 });
 
-app.put('/api/contacts/:id', (req, res) => {
+app.put('/contacts/:id', (req, res) => {
   const { id } = req.params;
   const { avatar, favorite, firstName, lastName, twitter, notes } = req.body;
   const contact = contacts.find(contact => contact.id === id);
@@ -66,7 +66,7 @@ app.put('/api/contacts/:id', (req, res) => {
   }
 });
 
-app.delete('/api/contacts/:id', (req, res) => {
+app.delete('/contacts/:id', (req, res) => {
   const { id } = req.params;
   const index = contacts.findIndex(contact => contact.id === id);
   if (index !== -1) {

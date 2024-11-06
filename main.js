@@ -25,7 +25,10 @@ app.post('/contacts', (req, res) => {
     createdAt: Date.now()
   };
   contacts.push(contact);
-  res.status(201).send(contact);
+
+  setTimeout(() => {
+    res.status(201).send(contact);
+  }, 1000)
 });
 
 app.get('/contacts', (req, res) => {

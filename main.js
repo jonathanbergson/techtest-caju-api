@@ -25,11 +25,11 @@ app.post('/contacts', (req, res) => {
     createdAt: Date.now()
   };
   contacts.push(contact);
-  res.status(201).send(contact);
+  // res.status(201).send(contact);
 
-  // setTimeout(() => {
-  //   res.status(201).send(contact);
-  // }, 1000)
+  setTimeout(() => {
+    res.status(201).send(contact);
+  }, 600)
 });
 
 app.get('/contacts', (req, res) => {
@@ -47,7 +47,9 @@ app.get('/contacts/:id', (req, res) => {
   const { id } = req.params;
   const contact = contacts.find(contact => contact.id === id);
   if (contact) {
-    res.status(200).send(contact);
+    setTimeout(() => {
+      res.status(200).send(contact);
+    }, 1000)
   } else {
     res.status(404).send({ message: 'Contact not found' });
   }
